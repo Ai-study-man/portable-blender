@@ -42,6 +42,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Script id="ga-init" strategy="afterInteractive" dangerouslySetInnerHTML={{
           __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${GA_ID}');`
         }} />
+        {/* Google AdSense */}
+        <Script
+          id="adsense-lib"
+          async
+          strategy="afterInteractive"
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4372695356377122"
+          crossOrigin="anonymous"
+        />
       </head>
       <body>
         <Layout>{children}</Layout>
