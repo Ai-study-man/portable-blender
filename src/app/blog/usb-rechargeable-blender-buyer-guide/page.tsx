@@ -12,7 +12,7 @@ import path from 'path';
 ---
 title: "USB Rechargeable Blender Buyer Guide (2025): How to Choose the Right Portable Model"
 author: "Editorial Team"
-datePublished: "2025-02-05"
+ datePublished: "2025-08-11"
 description: "Comprehensive 2025 USB rechargeable blender buyer guide: runtime, torque, battery health, safety locks, travel features, and comparison factors for picking the best portable blender."
 keywords: [usb rechargeable blender, portable blender buyer guide, mini travel blender, cordless portable blender]
 ---
@@ -28,7 +28,7 @@ export default function Page() {
   const filePath = path.join(process.cwd(), 'src', 'app', 'blog', slug, 'page.tsx');
   const { frontmatter } = readFileWithFrontmatter(filePath);
   const url = absoluteUrl(`/blog/${slug}`);
-  const published = frontmatter.datePublished || '2025-02-05';
+  const published = frontmatter.datePublished || '2025-08-11';
   const modified = frontmatter.dateModified || getGitLastModified(filePath) || published;
   const author = frontmatter.author || 'Editorial Team';
   const keywords = frontmatter.keywords || [];

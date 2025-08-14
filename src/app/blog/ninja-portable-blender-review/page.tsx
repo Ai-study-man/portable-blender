@@ -11,7 +11,7 @@ import path from 'path';
 /*
 ---
 author: Editorial Team
-datePublished: 2025-01-10
+ datePublished: 2025-08-12
 description: In-depth 2025 Ninja portable blender review covering power, battery life, travel usability, pros & cons.
 keywords: [ninja portable blender, travel smoothie blender, best portable blender]
 ---
@@ -28,7 +28,7 @@ export default function Page() {
   const filePath = path.join(process.cwd(), 'src', 'app', 'blog', slug, 'page.tsx');
   const { frontmatter } = readFileWithFrontmatter(filePath);
   const url = absoluteUrl(`/blog/${slug}`);
-  const published = frontmatter.datePublished || '2025-01-10';
+  const published = frontmatter.datePublished || '2025-08-12';
   const modified = frontmatter.dateModified || getGitLastModified(filePath) || published;
   const author = frontmatter.author || 'Editorial Team';
   const keywords = frontmatter.keywords || [];

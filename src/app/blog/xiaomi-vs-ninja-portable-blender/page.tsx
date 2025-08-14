@@ -12,7 +12,7 @@ import path from 'path';
 ---
 title: "Xiaomi Portable Blender vs. Ninja: Which One Wins in 2025?"
 author: "Editorial Team"
-datePublished: "2025-01-12"
+ datePublished: "2025-08-10"
 description: "Head-to-head 2025 comparison of Xiaomi portable blender vs Ninja: power, portability, battery life, travel performance, pros & cons."
 keywords: [xiaomi portable blender, ninja portable blender, travel smoothie blender, best portable blender]
 ---
@@ -28,7 +28,7 @@ export default function Page() {
   const filePath = path.join(process.cwd(), 'src', 'app', 'blog', slug, 'page.tsx');
   const { frontmatter } = readFileWithFrontmatter(filePath);
   const url = absoluteUrl(`/blog/${slug}`);
-  const published = frontmatter.datePublished || '2025-01-12';
+  const published = frontmatter.datePublished || '2025-08-10';
   const modified = frontmatter.dateModified || getGitLastModified(filePath) || published;
   const author = frontmatter.author || 'Editorial Team';
   const keywords = frontmatter.keywords || [];

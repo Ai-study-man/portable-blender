@@ -12,7 +12,7 @@ import path from 'path';
 ---
 title: "How to Make Smoothies While Traveling: Tips, Tools & Portable Blender Tricks (2025)"
 author: "Editorial Team"
-datePublished: "2025-02-01"
+ datePublished: "2025-08-14"
 description: "Guide to making smoothies while traveling: packing strategies, portable blender workflow, nutrition hacks."
 keywords: [travel smoothies, travel smoothie blender, make smoothies while traveling, portable blender tips]
 ---
@@ -28,7 +28,7 @@ export default function Page() {
   const filePath = path.join(process.cwd(), 'src', 'app', 'blog', slug, 'page.tsx');
   const { frontmatter } = readFileWithFrontmatter(filePath);
   const url = absoluteUrl(`/blog/${slug}`);
-  const published = frontmatter.datePublished || '2025-02-01';
+  const published = frontmatter.datePublished || '2025-08-14';
   const modified = frontmatter.dateModified || getGitLastModified(filePath) || published;
   const author = frontmatter.author || 'Editorial Team';
   const keywords = frontmatter.keywords || [];

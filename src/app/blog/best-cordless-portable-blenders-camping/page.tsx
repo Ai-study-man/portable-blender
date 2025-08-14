@@ -12,7 +12,7 @@ import path from 'path';
 ---
 title: "Best Cordless Portable Blenders for Camping and Outdoor Trips (2025 Guide)"
 author: "Editorial Team"
-datePublished: "2025-01-15"
+ datePublished: "2025-08-15"
 description: "2025 buyer guide to the best cordless portable blenders for camping: runtime tests, durability, USB performance, recommendations."
 keywords: [cordless portable blender, camping blender, best portable blender, usb rechargeable blender]
 ---
@@ -28,7 +28,7 @@ export default function Page() {
   const filePath = path.join(process.cwd(), 'src', 'app', 'blog', slug, 'page.tsx');
   const { frontmatter } = readFileWithFrontmatter(filePath);
   const url = absoluteUrl(`/blog/${slug}`);
-  const published = frontmatter.datePublished || '2025-01-15';
+  const published = frontmatter.datePublished || '2025-08-15';
   const modified = frontmatter.dateModified || getGitLastModified(filePath) || published;
   const author = frontmatter.author || 'Editorial Team';
   const keywords = frontmatter.keywords || [];

@@ -12,7 +12,7 @@ import path from 'path';
 ---
 title: "Mini Travel Blender vs Standard Blender: Pros, Cons & Use Cases (2025)"
 author: "Editorial Team"
-datePublished: "2025-02-08"
+ datePublished: "2025-08-13"
 description: "Mini travel blender vs standard blender comparison: power, texture quality, portability, maintenance, recipe flexibility, and when a portable blender is enough."
 keywords: [mini travel blender, standard blender comparison, portable blender vs countertop, travel smoothie blender]
 ---
@@ -28,7 +28,7 @@ export default function Page() {
   const filePath = path.join(process.cwd(), 'src', 'app', 'blog', slug, 'page.tsx');
   const { frontmatter } = readFileWithFrontmatter(filePath);
   const url = absoluteUrl(`/blog/${slug}`);
-  const published = frontmatter.datePublished || '2025-02-08';
+  const published = frontmatter.datePublished || '2025-08-13';
   const modified = frontmatter.dateModified || getGitLastModified(filePath) || published;
   const author = frontmatter.author || 'Editorial Team';
   const keywords = frontmatter.keywords || [];
