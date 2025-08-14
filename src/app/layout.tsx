@@ -1,6 +1,7 @@
 import '../styles/global.css';
 import Layout from '../components/Layout';
 import type { Metadata } from 'next';
+import Script from 'next/script';
 
 export const metadata: Metadata = {
   title: {
@@ -31,11 +32,22 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const GA_ID = process.env.NEXT_PUBLIC_GA_ID || 'G-9HPMGMXNDZ';
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://example.com';
   return (
-  <html lang="en" className="min-h-full" suppressHydrationWarning>
+    <html lang="en" className="min-h-full" suppressHydrationWarning>
+      <head>
+        {/* Google Analytics global site tag */}
+        <Script id="ga-lib" src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} strategy="afterInteractive" />
+        <Script id="ga-init" strategy="afterInteractive" dangerouslySetInnerHTML={{
+          __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${GA_ID}');`
+        }} />
+      </head>
       <body>
         <Layout>{children}</Layout>
-    <script dangerouslySetInnerHTML={{__html:`(function(){try{const m=window.matchMedia('(prefers-color-scheme: dark)').matches;const s=localStorage.getItem('theme');if(s==='dark'||(!s&&m))document.documentElement.classList.add('dark');}catch(e){}})();`}} />
+        {/* Theme hydration script */}
+        <script dangerouslySetInnerHTML={{ __html: `(function(){try{const m=window.matchMedia('(prefers-color-scheme: dark)').matches;const s=localStorage.getItem('theme');if(s==='dark'||(!s&&m))document.documentElement.classList.add('dark');}catch(e){}})();` }} />
+        {/* Organization JSON-LD */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -43,11 +55,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               '@context': 'https://schema.org',
               '@type': 'Organization',
               name: 'Portable Blenders Travel Guide',
-              url: process.env.NEXT_PUBLIC_SITE_URL || 'https://example.com',
-              logo: (process.env.NEXT_PUBLIC_SITE_URL || 'https://example.com') + '/og-cover.jpg'
+              url: siteUrl,
+              logo: siteUrl + '/og-cover.jpg'
             })
           }}
         />
+        {/* WebSite / SearchAction JSON-LD */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -55,10 +68,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               '@context': 'https://schema.org',
               '@type': 'WebSite',
               name: 'Portable Blenders Travel Guide',
-              url: process.env.NEXT_PUBLIC_SITE_URL || 'https://example.com',
+              url: siteUrl,
               potentialAction: {
                 '@type': 'SearchAction',
-                target: (process.env.NEXT_PUBLIC_SITE_URL || 'https://example.com') + '/search?q={search_term_string}',
+                target: siteUrl + '/search?q={search_term_string}',
                 'query-input': 'required name=search_term_string'
               }
             })
