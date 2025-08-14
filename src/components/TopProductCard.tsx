@@ -55,7 +55,7 @@ export default function TopProductCard({ product }: { product: ShowcaseProduct }
   return (
     <article
       ref={ref as any}
-  className={`h-full flex flex-col rounded-2xl border border-slate-200/70 dark:border-slate-700/60 bg-white/90 dark:bg-slate-800/80 backdrop-blur-sm shadow-sm hover:shadow-xl transition-all overflow-hidden ring-1 ring-transparent hover:ring-violet-200/70 dark:hover:ring-fuchsia-400/40 hover:-translate-y-1 ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'} ${prefersReducedMotion ? 'transition-none' : 'duration-300'} `}
+	className={`h-full flex flex-col rounded-2xl border border-slate-200/70 dark:border-slate-700/60 bg-white dark:bg-slate-800 shadow-sm hover:shadow-xl transition-all overflow-hidden ring-1 ring-transparent hover:ring-violet-200/70 dark:hover:ring-fuchsia-400/40 hover:-translate-y-1 ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'} ${prefersReducedMotion ? 'transition-none' : 'duration-300'} `}
     >
       <div
         className="relative w-full bg-gradient-to-br from-slate-50 via-slate-100 to-slate-200 dark:from-slate-700 dark:via-slate-700 dark:to-slate-600 flex items-center justify-center overflow-hidden group"
@@ -105,8 +105,9 @@ export default function TopProductCard({ product }: { product: ShowcaseProduct }
         )}
       </div>
       <div className="flex flex-col p-5 flex-1">
-        <h3 className="text-base md:text-[1.05rem] font-bold tracking-tight mb-2 line-clamp-2 text-slate-800 dark:text-slate-100">
-          <a href={`/products/${product.slug}`} className="hover:underline">{product.name}</a>
+        <h3 className="relative text-[1.05rem] md:text-[1.12rem] font-extrabold leading-snug mb-2 line-clamp-2 text-slate-900 dark:text-white drop-shadow-[0_1px_1px_rgba(0,0,0,0.08)]">
+          <span className="absolute inset-0 rounded-md bg-white/85 dark:bg-slate-700/60 backdrop-blur-sm -z-10" />
+          <a href={`/products/${product.slug}`} className="hover:underline decoration-2 decoration-violet-300/60 dark:decoration-fuchsia-400/50 hover:decoration-violet-500 dark:hover:decoration-fuchsia-300 transition">{product.name}</a>
         </h3>
         <p className="text-sm text-slate-600 dark:text-slate-300 mb-3 leading-relaxed line-clamp-4">{product.description}</p>
   <ul className="list-disc ml-4 mb-3 space-y-1 text-[11px] leading-snug text-slate-600 dark:text-slate-400 marker:text-violet-400 dark:marker:text-fuchsia-400">

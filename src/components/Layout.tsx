@@ -18,14 +18,14 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
 function Header() {
   return (
-    <header className="sticky top-0 z-40 w-full backdrop-blur bg-white/80 dark:bg-slate-900/70 border-b border-slate-200/70 dark:border-slate-700/60 shadow-[0_2px_8px_-2px_rgba(0,0,0,0.04)]">
+    <header className="sticky top-0 z-40 w-full backdrop-blur-md bg-white/95 dark:bg-slate-950/85 border-b border-slate-200/70 dark:border-slate-800 shadow-[0_2px_8px_-2px_rgba(0,0,0,0.06)] supports-[backdrop-filter]:backdrop-saturate-150">
       <div className="container flex items-center justify-between h-14 md:h-16 gap-4">
-        <div className="flex items-center gap-6">
-          <Link href="/" className="logo font-bold bg-clip-text text-transparent bg-gradient-to-r from-violet-600 to-fuchsia-600">Portable Blenders</Link>
-          <nav className="hidden md:flex items-center gap-6 text-sm font-medium text-slate-700 dark:text-slate-200">
-            <Link className="hover:text-violet-600 dark:hover:text-fuchsia-400 transition-colors" href="/">Home</Link>
-            <Link className="hover:text-violet-600 dark:hover:text-fuchsia-400 transition-colors" href="/blog">Blog</Link>
-            <Link className="hover:text-violet-600 dark:hover:text-fuchsia-400 transition-colors" href="/about">About</Link>
+        <div className="flex items-center gap-7">
+          <Link href="/" className="logo font-bold text-lg tracking-tight text-violet-700 dark:text-fuchsia-300 hover:text-violet-800 dark:hover:text-fuchsia-200 transition-colors">Portable Blenders</Link>
+          <nav className="hidden md:flex items-center gap-7 text-[13px] font-medium text-slate-800 dark:text-slate-100">
+            <Link className="hover:text-violet-700 dark:hover:text-fuchsia-300 transition-colors" href="/">Home</Link>
+            <Link className="hover:text-violet-700 dark:hover:text-fuchsia-300 transition-colors" href="/blog">Blog</Link>
+            <Link className="hover:text-violet-700 dark:hover:text-fuchsia-300 transition-colors" href="/about">About</Link>
           </nav>
         </div>
         <div className="flex items-center gap-3">
