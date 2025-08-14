@@ -9,9 +9,10 @@ export interface BlogCardProps {
   date: string;
   description: string;
   index?: number;
+  thumbnail?: string;
 }
 
-export function BlogCard({ slug, title, date, description }: BlogCardProps) {
+export function BlogCard({ slug, title, date, description, thumbnail }: BlogCardProps) {
   const prefersReducedMotion = typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const ref = useRef<HTMLElement | null>(null);
   const [visible, setVisible] = useState(false);
@@ -33,6 +34,19 @@ export function BlogCard({ slug, title, date, description }: BlogCardProps) {
     >
       {!loaded && <div className="absolute inset-0 skeleton" aria-hidden />}
       <div className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity bg-[radial-gradient(circle_at_30%_20%,rgba(99,102,241,0.09),transparent_60%)]" />
+      {thumbnail && (
+        <div className="relative mb-4 -mx-4 -mt-4 overflow-hidden rounded-t-2xl aspect-[4/2.3] bg-slate-100 dark:bg-slate-700/50">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={thumbnail}
+            alt={title}
+            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.05]"
+            loading="lazy"
+            onError={(e)=>{ const t=e.currentTarget; if(!t.dataset.fallback){ t.dataset.fallback='1'; t.src='/picture/blog/placeholder.jpg'; } }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-white/90 via-white/30 dark:from-slate-900/90 dark:via-slate-900/20 pointer-events-none" />
+        </div>
+      )}
       <h2 className="m-0 text-lg font-bold tracking-tight text-slate-800 dark:text-slate-100">
         <Link href={`/blog/${slug}`}>{title}</Link>
       </h2>

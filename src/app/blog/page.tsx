@@ -78,7 +78,7 @@ export default function BlogIndex({ searchParams }: { searchParams: { page?: str
       <p className="text-slate-600 text-sm md:text-base max-w-2xl">Portable blender reviews, travel smoothie tips, buyer comparisons.</p>
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-7 mt-10">
         {slice.map((e, idx) => (
-          <BlogCard key={e.slug} slug={e.slug} title={e.title} date={e.date} description={e.description} index={idx} />
+          <BlogCard key={e.slug} slug={e.slug} title={e.title} date={e.date} description={e.description} index={idx} thumbnail={(e as any).thumbnail} />
         ))}
       </div>
       <div className="flex items-center justify-center gap-3 mt-10 text-sm">
