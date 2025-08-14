@@ -1,11 +1,10 @@
-import fs from 'fs';
-import path from 'path';
 import Link from 'next/link';
 import BlogCard from '../../components/BlogCard';
 import { Metadata } from 'next';
 import { absoluteUrl, DEFAULT_IMAGE } from '../../lib/seo';
 import { BreadcrumbJsonLd } from '../../components/BreadcrumbJsonLd';
 import { readFileWithFrontmatter } from '../../lib/frontmatter';
+import { getBlogIndexSorted } from '../../content/blog';
 
 export function generateMetadata({ searchParams }: { searchParams: { page?: string } }): Metadata {
   const page = parseInt(searchParams.page || '1',10);
@@ -30,29 +29,23 @@ function truncate160(text: string) {
 }
 
 function readBlogEntries(): BlogEntry[] {
-  const blogDir = path.join(process.cwd(), 'src', 'app', 'blog');
-  let entries: BlogEntry[] = [];
-  try {
-    const dirs = fs.readdirSync(blogDir, { withFileTypes: true }).filter(d => d.isDirectory());
-    entries = dirs.map(d => {
-      const slug = d.name;
-      const pagePath = path.join(blogDir, slug, 'page.tsx');
-      let title = slug.replace(/-/g,' ').replace(/\b\w/g,c=>c.toUpperCase());
-      let date = '2025-01-01';
-      let description = title + ' – portable blender topic.';
-      try {
-        if (fs.existsSync(pagePath)) {
-          const { frontmatter } = readFileWithFrontmatter(pagePath);
-            if (frontmatter.title) title = frontmatter.title;
-            if (frontmatter.datePublished) date = frontmatter.datePublished;
-            if (frontmatter.description) description = frontmatter.description;
-        }
-      } catch {}
-  return { slug, title, date, description: truncate160(description) };
-    });
-  } catch {}
-  // Sort by date desc then title
-  return entries.sort((a,b)=> (a.date < b.date ? 1 : a.date > b.date ? -1 : a.title.localeCompare(b.title)));
+  // Use static index for production reliability (no runtime fs at edge / serverless).
+  const staticEntries = getBlogIndexSorted();
+  // Attempt to enhance with frontmatter (dev optimization; if fs fails it silently continues).
+  return staticEntries.map(e => {
+    try {
+      const filePath = process.cwd() + `/src/app/blog/${e.slug}/page.tsx`;
+      const { frontmatter } = readFileWithFrontmatter(filePath);
+      return {
+        slug: e.slug,
+        title: (frontmatter.title as string) || e.title,
+        date: (frontmatter.datePublished as string) || e.date,
+        description: truncate160((frontmatter.description as string) || e.description)
+      };
+    } catch {
+      return e;
+    }
+  });
 }
 
 export default function BlogIndex({ searchParams }: { searchParams: { page?: string } }) {
