@@ -139,16 +139,17 @@ export default async function ProductPage({ params }: Props) {
       />
       <nav className="text-xs mb-6 text-slate-500 dark:text-slate-400"><Link href="/" className="hover:underline">Home</Link> / <Link href="/products" className="hover:underline">Products</Link> / <span className="text-slate-700 dark:text-slate-300">{title}</span></nav>
         <header className="grid gap-8 md:grid-cols-2 items-start mb-10">
-          <div className="relative rounded-2xl border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-800 p-4 flex items-center justify-center aspect-[4/3] overflow-hidden">
+          <div className="relative rounded-2xl border border-slate-200 dark:border-slate-600 bg-gradient-to-br from-white via-slate-50 to-slate-100 dark:from-slate-800 dark:via-slate-700 dark:to-slate-600 p-4 flex items-center justify-center aspect-[4/3] overflow-hidden shadow-sm">
             <Image
               src={displayImage}
               alt={title}
               width={640}
               height={480}
-              className="object-contain w-full h-full"
+              className="object-contain w-full h-full rounded-lg transition-transform hover:scale-105"
               placeholder="blur"
               blurDataURL={shimmerDataURL(640,480)}
-              priority={false}
+              priority={true}
+              unoptimized={true}
             />
           </div>
           <div>
@@ -170,21 +171,21 @@ export default async function ProductPage({ params }: Props) {
           </div>
         </header>
 
-        <section className="prose prose-slate dark:prose-invert max-w-none mb-12" dangerouslySetInnerHTML={{ __html: content }} />
+        <section className="prose prose-slate dark:prose-invert max-w-none mb-12 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-xl p-6 border border-slate-200 dark:border-slate-700" dangerouslySetInnerHTML={{ __html: content }} />
 
         <section className="grid gap-8 md:grid-cols-2 mb-16">
           {pros.length > 0 && (
-            <div className="rounded-xl border border-slate-200 dark:border-slate-600 bg-white/70 dark:bg-slate-800/60 backdrop-blur p-5">
+            <div className="rounded-xl border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-800 shadow-sm p-5">
               <h2 className="text-base font-semibold mb-3 tracking-wide text-slate-800 dark:text-slate-200">Pros</h2>
-              <ul className="space-y-1 text-sm text-slate-600 dark:text-slate-300 list-disc ml-4 marker:text-violet-400 dark:marker:text-fuchsia-400">
+              <ul className="space-y-1 text-sm text-slate-700 dark:text-slate-200 list-disc ml-4 marker:text-green-500 dark:marker:text-green-400">
                 {pros.map((p:string,i:number)=><li key={i}>{p}</li>)}
               </ul>
             </div>
           )}
           {cons.length > 0 && (
-            <div className="rounded-xl border border-rose-200 dark:border-rose-500/40 bg-rose-50/60 dark:bg-rose-900/20 backdrop-blur p-5">
-              <h2 className="text-base font-semibold mb-3 tracking-wide text-rose-700 dark:text-rose-300">Cons</h2>
-              <ul className="space-y-1 text-sm text-rose-700/80 dark:text-rose-200 list-disc ml-4 marker:text-rose-400 dark:marker:text-rose-300">
+            <div className="rounded-xl border border-rose-200 dark:border-rose-500/40 bg-rose-50 dark:bg-rose-900/30 shadow-sm p-5">
+              <h2 className="text-base font-semibold mb-3 tracking-wide text-rose-800 dark:text-rose-200">Cons</h2>
+              <ul className="space-y-1 text-sm text-rose-800 dark:text-rose-200 list-disc ml-4 marker:text-rose-500 dark:marker:text-rose-400">
                 {cons.map((c:string,i:number)=><li key={i}>{c}</li>)}
               </ul>
             </div>
@@ -192,31 +193,31 @@ export default async function ProductPage({ params }: Props) {
         </section>
         {/* Feature comparison / CTA section */}
         <section className="mb-16">
-          <div className="rounded-2xl border border-slate-200 dark:border-slate-600 bg-white/80 dark:bg-slate-800/70 backdrop-blur p-6">
-            <h2 className="text-lg font-semibold mb-4 tracking-tight">Key Feature Snapshot</h2>
+          <div className="rounded-2xl border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-800 shadow-sm p-6">
+            <h2 className="text-lg font-semibold mb-4 tracking-tight text-slate-800 dark:text-slate-200">Key Feature Snapshot</h2>
             <div className="overflow-x-auto -mx-2 md:mx-0">
               <table className="min-w-[560px] w-full text-sm border border-slate-200 dark:border-slate-600">
-                <thead className="bg-slate-50 dark:bg-slate-700/40">
+                <thead className="bg-slate-100 dark:bg-slate-700">
                   <tr className="text-left">
-                    <th className="p-2 font-medium">Attribute</th>
-                    <th className="p-2 font-medium">Value</th>
+                    <th className="p-3 font-medium text-slate-800 dark:text-slate-200">Attribute</th>
+                    <th className="p-3 font-medium text-slate-800 dark:text-slate-200">Value</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-200 dark:divide-slate-600">
                   {staticMeta.brand && (
-                    <tr><td className="p-2 text-slate-600 dark:text-slate-300">Brand</td><td className="p-2">{staticMeta.brand}</td></tr>
+                    <tr><td className="p-3 text-slate-700 dark:text-slate-300 font-medium">Brand</td><td className="p-3 text-slate-800 dark:text-slate-200">{staticMeta.brand}</td></tr>
                   )}
                   {price && (
-                    <tr><td className="p-2 text-slate-600 dark:text-slate-300">Approx. Price</td><td className="p-2">{price}</td></tr>
+                    <tr><td className="p-3 text-slate-700 dark:text-slate-300 font-medium">Approx. Price</td><td className="p-3 text-slate-800 dark:text-slate-200">{price}</td></tr>
                   )}
                   {ratingValue && (
-                    <tr><td className="p-2 text-slate-600 dark:text-slate-300">Rating</td><td className="p-2">{ratingValue.toFixed(1)}{reviewCount?` / 5 (${reviewCount.toLocaleString()} reviews)`:''}</td></tr>
+                    <tr><td className="p-3 text-slate-700 dark:text-slate-300 font-medium">Rating</td><td className="p-3 text-slate-800 dark:text-slate-200">{ratingValue.toFixed(1)}{reviewCount?` / 5 (${reviewCount.toLocaleString()} reviews)`:''}</td></tr>
                   )}
                   {features.slice(0,5).map((f,i)=>(
-                    <tr key={i}><td className="p-2 text-slate-600 dark:text-slate-300">Feature {i+1}</td><td className="p-2">{f}</td></tr>
+                    <tr key={i}><td className="p-3 text-slate-700 dark:text-slate-300 font-medium">Feature {i+1}</td><td className="p-3 text-slate-800 dark:text-slate-200">{f}</td></tr>
                   ))}
                   {!features.length && (
-                    <tr><td className="p-2 text-slate-600 dark:text-slate-300">Features</td><td className="p-2 italic text-slate-500">Not listed</td></tr>
+                    <tr><td className="p-3 text-slate-700 dark:text-slate-300 font-medium">Features</td><td className="p-3 italic text-slate-500 dark:text-slate-400">Not listed</td></tr>
                   )}
                 </tbody>
               </table>
@@ -231,13 +232,13 @@ export default async function ProductPage({ params }: Props) {
             )}
           </div>
         </section>
-      <div className="mt-16 border-t pt-8">
-        <h2 className="text-lg font-semibold mb-4">Related Products</h2>
+      <div className="mt-16 border-t border-slate-200 dark:border-slate-700 pt-8">
+        <h2 className="text-lg font-semibold mb-4 text-slate-800 dark:text-slate-200">Related Products</h2>
         <ul className="grid sm:grid-cols-3 gap-4 list-none pl-0">
           {relatedProducts.map(r => (
-            <li key={r.slug} className="text-sm border rounded-lg p-3 bg-white/60 dark:bg-slate-700/40 backdrop-blur">
-              <a href={`/products/${r.slug}`} className="font-medium hover:underline block mb-1">{r.name}</a>
-              <a href={`/products/${r.slug}`} className="text-[11px] text-violet-600 dark:text-fuchsia-400 hover:underline">View Details →</a>
+            <li key={r.slug} className="text-sm border border-slate-200 dark:border-slate-600 rounded-lg p-4 bg-white dark:bg-slate-800 shadow-sm hover:shadow-md transition-shadow">
+              <a href={`/products/${r.slug}`} className="font-medium hover:underline block mb-2 text-slate-800 dark:text-slate-200">{r.name}</a>
+              <a href={`/products/${r.slug}`} className="text-xs text-violet-600 dark:text-fuchsia-400 hover:underline font-medium">View Details →</a>
             </li>
           ))}
         </ul>

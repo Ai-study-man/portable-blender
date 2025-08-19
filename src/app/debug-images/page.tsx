@@ -26,7 +26,7 @@ export default function DebugImages() {
                   const t = e.currentTarget;
                   if (!t.dataset.fallback){
                     t.dataset.fallback='1';
-                    t.src='/picture/placeholder-blender.svg';
+                    t.src='/picture/placeholder-blender.jpg';
                   }
                 }}
               />

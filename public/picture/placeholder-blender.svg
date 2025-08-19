@@ -1,1 +1,8 @@
-<svg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300' preserveAspectRatio='xMidYMid meet'><defs><linearGradient id='g' x1='0' x2='1' y1='0' y2='1'><stop offset='0%' stop-color='#6366f1'/><stop offset='100%' stop-color='#06b6d4'/></linearGradient><style><![CDATA[text{font-family:Arial,sans-serif}]]></style></defs><rect width='400' height='300' fill='url(#g)'/><g fill='#fff' fill-opacity='0.1'><rect x='30' y='30' width='340' height='240' rx='24'/></g><g stroke='#ffffff55' stroke-width='4' stroke-linecap='round'><path d='M170 70h60l10 120c2 24-16 40-40 40s-42-16-40-40l10-120z' fill='none'/><path d='M175 90h50' /><path d='M180 110h40' /><path d='M185 130h30' /><path d='M195 150h10' /></g><circle cx='200' cy='220' r='22' stroke='#fff' stroke-width='4' fill='none'/><text x='200' y='278' font-size='20' fill='#fff' text-anchor='middle'>No Image</text></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300" fill="none">
+  <rect width="400" height="300" fill="#f1f5f9"/>
+  <rect x="50" y="50" width="300" height="200" rx="20" fill="#e2e8f0"/>
+  <circle cx="200" cy="100" r="20" fill="#64748b"/>
+  <rect x="160" y="130" width="80" height="40" rx="8" fill="#64748b"/>
+  <rect x="170" y="180" width="60" height="20" rx="4" fill="#94a3b8"/>
+  <text x="200" y="240" text-anchor="middle" fill="#64748b" font-family="Arial, sans-serif" font-size="12">Portable Blender</text>
+</svg>

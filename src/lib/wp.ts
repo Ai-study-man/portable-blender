@@ -1,5 +1,8 @@
 export const WP_API_BASE = 'https://mywp.com/wp-json/wp/v2';
 
+// Import real product data
+import { products as realProducts } from '../../products';
+
 export interface WPPost {
   id: number;
   slug: string;
@@ -54,14 +57,37 @@ const mockProducts: WPProduct[] = Array.from({ length: 5 }).map((_, i) => ({
 function shouldUseMock(reason: string) {
   if (process.env.USE_WP_MOCK === '1') return true; // explicit opt-in
   // Fallback automatically during scaffold if network fails
-  return true; // always true for initial template; adjust later if desired
+  return false; // Use real product data from products.ts instead of mock data
 }
 
 export async function getTopProducts(limit = 5): Promise<WPProduct[]> {
   const url = `${WP_API_BASE}/product?per_page=${limit}&_embed`;
   try {
-  if (shouldUseMock('topProducts')) return mockProducts.slice(0, limit);
-    return await fetchJSON<WPProduct[]>(url);
+    if (shouldUseMock('topProducts')) return mockProducts.slice(0, limit);
+    
+    // Convert real products to WPProduct format
+    const wpProducts: WPProduct[] = realProducts.slice(0, limit).map((realProduct, index) => ({
+      id: index + 1,
+      slug: realProduct.slug,
+      title: { rendered: realProduct.name },
+      excerpt: { rendered: realProduct.description },
+      content: { rendered: `<p>${realProduct.description}</p><h3>Key Features:</h3><ul>${(realProduct as any).features?.map((f: string) => `<li>${f}</li>`).join('') || ''}</ul>` },
+      featured_media: 0,
+      yoast_head_json: { 
+        title: realProduct.name, 
+        description: realProduct.description 
+      },
+      acf: {
+        pros: (realProduct as any).features || ['Portable design', 'Easy to use', 'Good performance'],
+        cons: ['Limited capacity'],
+        rating: (realProduct as any).rating || 4.5,
+        affiliate_url: realProduct.affiliateUrl || '#',
+        price: (realProduct as any).priceRange || 'See listing',
+        short_specs: `${(realProduct as any).brand || 'Generic'} brand portable blender`
+      }
+    }));
+    
+    return wpProducts;
   } catch {
     return mockProducts.slice(0, limit);
   }
@@ -70,9 +96,35 @@ export async function getTopProducts(limit = 5): Promise<WPProduct[]> {
 export async function getProductBySlug(slug: string): Promise<WPProduct | null> {
   const url = `${WP_API_BASE}/product?slug=${slug}&_embed`;
   try {
-  if (shouldUseMock('productBySlug')) return mockProducts.find(p => p.slug === slug) || mockProducts[0];
-    const data = await fetchJSON<WPProduct[]>(url);
-    return data[0] || null;
+    if (shouldUseMock('productBySlug')) return mockProducts.find(p => p.slug === slug) || mockProducts[0];
+    
+    // Find product in real product data
+    const realProduct = realProducts.find(p => p.slug === slug);
+    if (!realProduct) return null;
+    
+    // Convert real product to WPProduct format
+    const wpProduct: WPProduct = {
+      id: realProducts.indexOf(realProduct) + 1,
+      slug: realProduct.slug,
+      title: { rendered: realProduct.name },
+      excerpt: { rendered: realProduct.description },
+      content: { rendered: `<p>${realProduct.description}</p><h3>Key Features:</h3><ul>${(realProduct as any).features?.map((f: string) => `<li>${f}</li>`).join('') || ''}</ul>` },
+      featured_media: 0,
+      yoast_head_json: { 
+        title: realProduct.name, 
+        description: realProduct.description 
+      },
+      acf: {
+        pros: (realProduct as any).features || ['Portable design', 'Easy to use', 'Good performance'],
+        cons: ['Limited capacity'],
+        rating: (realProduct as any).rating || 4.5,
+        affiliate_url: realProduct.affiliateUrl || '#',
+        price: (realProduct as any).priceRange || 'See listing',
+        short_specs: `${(realProduct as any).brand || 'Generic'} brand portable blender`
+      }
+    };
+    
+    return wpProduct;
   } catch {
     return mockProducts.find(p => p.slug === slug) || null;
   }
@@ -81,9 +133,9 @@ export async function getProductBySlug(slug: string): Promise<WPProduct | null> 
 export async function getAllProductSlugs(): Promise<string[]> {
   const url = `${WP_API_BASE}/product?per_page=100&_fields=slug`;
   try {
-  if (shouldUseMock('allSlugs')) return mockProducts.map(p => p.slug);
-    const data = await fetchJSON<{ slug: string }[]>(url);
-    return data.map(p => p.slug);
+    if (shouldUseMock('allSlugs')) return mockProducts.map(p => p.slug);
+    // Use real product data from products.ts
+    return realProducts.map(p => p.slug);
   } catch {
     return mockProducts.map(p => p.slug);
   }

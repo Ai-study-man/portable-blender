@@ -98,7 +98,7 @@ export default function TopProductCard({ product }: { product: ShowcaseProduct }
               const t = e.currentTarget;
               if (!t.dataset.fallback){
                 t.dataset.fallback='1';
-                t.src='/picture/placeholder-blender.svg';
+                t.src='/picture/placeholder-blender.jpg';
               }
             }}
           />
